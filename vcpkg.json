@@ -2,12 +2,6 @@
     "dependencies": [
         "cxxopts",
         "spdlog",
-        "boost-system",
-        "boost-thread",
-        "boost-filesystem",
-        "boost-asio",
-        "boost-icl",
-        "boost-property-tree",
-        "boost-foreach"
+        "gtest"
     ]
 }
