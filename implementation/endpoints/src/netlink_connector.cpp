@@ -435,7 +435,7 @@ bool netlink_connector::check_sd_multicast_route_match(struct rtmsg* _routemsg,
 
                 for (int i = 0; i < 4; i++) {
 #ifndef ANDROID
-                    const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).__in6_u.__u6_addr32[i]);
+                    const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).s6_addr32[i]);
 #else
                     const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).in6_u.u6_addr32[i]);
 #endif
