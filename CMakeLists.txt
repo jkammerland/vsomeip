@@ -4,9 +4,6 @@
 # obtain one at http://mozilla.org/MPL/2.0/.
 
 cmake_minimum_required(VERSION 3.13)
-set(CMAKE_TOOLCHAIN_FILE
-    "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    CACHE STRING "Vcpkg toolchain file")
 project(vsomeip)
 
 set(VSOMEIP_NAME vsomeip3)
