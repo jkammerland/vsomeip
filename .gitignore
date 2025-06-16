@@ -15,4 +15,5 @@
 /tools/CMakeFiles
 /Testing
 /logs
+.cache/*
 !build_qnx/*
