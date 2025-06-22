@@ -446,10 +446,13 @@ bool netlink_connector::check_sd_multicast_route_match(struct rtmsg* _routemsg,
                 }
 
                 for (int i = 0; i < 4; i++) {
-#ifndef ANDROID
-                    const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).__in6_u.__u6_addr32[i]);
-#else
+#ifdef ANDROID
                     const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).in6_u.u6_addr32[i]);
+#elif defined(__linux__) && !defined(__GLIBC__)
+                    // musl use s6_addr directly
+                    const std::uint32_t dst = ntohl(reinterpret_cast<const uint32_t *>(((struct in6_addr *)RTA_DATA(retrta))->s6_addr)[i]);
+#else
+                    const std::uint32_t dst = ntohl((*(struct in6_addr*)RTA_DATA(retrta)).__in6_u.__u6_addr32[i]);
 #endif
                     const std::uint32_t sd = ntohl(reinterpret_cast<std::uint32_t*>(multicast_address_.to_v6().to_bytes().data())[i]);
                     const std::uint32_t dst_net = dst & netmask2[i];
